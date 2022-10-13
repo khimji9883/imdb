@@ -16,110 +16,120 @@ class _HomePageState extends State<HomePage> {
     if (list.length == 0) {
       return Expanded(
         child: Center(
-            child: error != '' ? Text(error) : Text('Go do a search!!!!!')),
+          child: error != ''
+              ? Text(error)
+              : Text(
+                  'Go do a search!!!!!',
+                ),
+        ),
       );
     }
     return Expanded(
       child: ListView.builder(
-          padding: const EdgeInsets.all(8),
-          itemCount: list.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              elevation: 10,
-              margin: EdgeInsets.symmetric(vertical: 20),
-              child: Container(
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 20),
-                      child: Container(
-                        height: 140,
-                        width: 100,
-                        child: OverflowBox(
-                          alignment: Alignment.bottomCenter,
-                          child: Image.network(
-                            list[index].posterURL,
+        padding: const EdgeInsets.all(8),
+        itemCount: list.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            elevation: 10,
+            margin: EdgeInsets.symmetric(vertical: 20),
+            child: Container(
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30, bottom: 20),
+                    child: Container(
+                      height: 140,
+                      width: 100,
+                      child: OverflowBox(
+                        alignment: Alignment.bottomCenter,
+                        child: Image.network(
+                          list[index].posterURL,
+                        ),
+                        maxWidth: 120,
+                        minHeight: 0,
+                        minWidth: 0,
+                        maxHeight: 160,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 40),
+                  Expanded(
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            list[index].title,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.start,
+                            maxLines: 2,
+                            softWrap: true,
                           ),
-                          maxWidth: 120,
-                          minHeight: 0,
-                          minWidth: 0,
-                          maxHeight: 160,
-                        ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Text(
+                            "Genre : ${list[index].genre}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.start,
+                            softWrap: true,
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                list[index].imdbRatings.toString(),
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.deepPurple,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.start,
+                                softWrap: true,
+                              ),
+                              RatingBar(
+                                initialRating: list[index].imdbRatings / 2,
+                                direction: Axis.horizontal,
+                                itemSize: 25,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemPadding: EdgeInsets.symmetric(
+                                  horizontal: 4.0,
+                                ),
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.deepOrange,
+                                ),
+                                glow: true,
+                                glowColor: Colors.orange,
+                                ignoreGestures: true,
+                                tapOnlyMode: false,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              list[index].title,
-                              style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.start,
-                              maxLines: 2,
-                              softWrap: true,
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Text(
-                              "Genre : ${list[index].genre}",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.start,
-                              softWrap: true,
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Text(
-                                  list[index].imdbRatings.toString(),
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.deepPurple,
-                                      fontWeight: FontWeight.bold),
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.start,
-                                  softWrap: true,
-                                ),
-                                RatingBar(
-                                  initialRating: list[index].imdbRatings / 2,
-                                  direction: Axis.horizontal,
-                                  itemSize: 25,
-                                  allowHalfRating: true,
-                                  itemCount: 5,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 4.0),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.deepOrange,
-                                  ),
-                                  glow: true,
-                                  glowColor: Colors.orange,
-                                  ignoreGestures: true,
-                                  tapOnlyMode: false,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 
